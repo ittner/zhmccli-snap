@@ -1,0 +1,38 @@
+name: zhmc
+summary: A CLI for the IBM Z HMC, written in pure Python
+description: |
+    The zhmccli package is a CLI written in pure Python that interacts with
+    the Hardware Management Console (HMC) of IBM Z or LinuxONE machines. The
+    goal of this package is to provide an easy-to-use command line interface
+    for operators.
+license: Apache-2.0
+source-code: https://github.com/zhmcclient/zhmccli.git
+website: https://github.com/zhmcclient/zhmccli.git
+base: core22
+grade: stable
+confinement: strict
+adopt-info: zhmccli
+architectures:
+  - build-on: amd64
+  - build-on: arm64
+  - build-on: s390x
+  - build-on: ppc64el
+
+parts:
+  zhmccli:
+    plugin: python
+    source: https://github.com/zhmcclient/zhmccli.git
+    source-tag: 1.11.0
+    source-type: git
+    override-pull: |
+      snapcraftctl pull
+      snapcraftctl set-version "$(git describe --tags)"
+    build-packages:
+      - git
+
+apps:
+  zhmc:
+    command: bin/zhmc
+    plugs:
+      - network
+      - home
