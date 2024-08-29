@@ -14,5 +14,5 @@ The zhmccli package uses the API provided by the zhmcclient package, which inter
 
 ## Install
 
-    sudo snap install zhmccli
+    sudo snap install zhmc
 
